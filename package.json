@@ -1,0 +1,23 @@
+{
+  "name": "vef1-2020-h2",
+  "version": "1.0.0",
+  "description": "Verkefnið felst í því að smíða vef lítinn myndbandavef sem nýtir gögn úr JSON skrá.",
+  "main": "index.js",
+  "dependencies": {
+    "sass": "^1.29.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gitcelo/vef1-2020-h2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gitcelo/vef1-2020-h2/issues"
+  },
+  "homepage": "https://github.com/Gitcelo/vef1-2020-h2#readme"
+}
