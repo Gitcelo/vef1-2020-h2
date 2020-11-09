@@ -32,7 +32,9 @@
     "sass": "node-sass --source-map-embed styles.scss styles.css",
     "sass-watch": "node-sass --source-map-embed styles.scss styles.css -w",
     "dev": "concurrently npm:sass-watch npm:browser-sync",
-    "lint": "stylelint styles.scss ./**/*.scss"
+    "lint": "stylelint styles.scss ./**/*.scss",
+    "build": "rollup -c",
+    "rollup-watch": "rollup -c -w"
   },
   "repository": {
     "type": "git",
