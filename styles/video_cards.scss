@@ -1,0 +1,46 @@
+@import 'config';
+
+.video {
+  &-card {
+    margin-bottom: $margin-bottom;
+  }
+
+  &-thumbnail {
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+
+  &-thumbnail img {
+    object-fit: contain;
+  }
+
+  &-timestamp {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    padding: 5px;
+    background-color: #000a;
+    color: #fff;
+    border-radius: 5px;
+  }
+
+  &-info {
+
+  }
+
+  &-name {
+    margin: 5px 0;
+  }
+
+  &-uploadtime {
+    margin: 0;
+  }
+
+  &-linebrake {
+    margin-top: 80px;
+    margin-bottom: $margin-bottom;
+    width: 80%;
+  }
+}
