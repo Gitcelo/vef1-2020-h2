@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hópverkefni 2</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Manneskja að vefforrita</h1>
+  <section class="video-view grid">
+    <video>
+      <source src="videos/typing.mp4" type="video/mp4">
+    </video>
+    <div class="video-controls">
+      <button class="video-controls__button" onclick="rewind()">
+        <img class="video-controls__img" src="img/back.svg">
+      </button>
+      <button class="video-controls__button" onclick="playþToggle()">
+        <img class="video-controls__img button__active" src="img/pause.svg">
+        <img class="video-controls__img button__unactive" src="img/play.svg">
+      </button>
+      <button class="video-controls__button" onclick="soundToggle()">
+        <img class="video-controls__img button__active" src="img/unmute.svg">
+        <img class="video-controls__img button__unactive" src="img/mute.svg">
+      </button>
+      <button class="video-controls__button" onclick="fullScreen()">
+        <img class="video-controls__img" src="img/fullscreen.svg">
+      </button>
+      <button class="video-controls__button" onclick="fastForward()">
+        <img class="video-controls__img" src="img/next.svg">
+      </button>
+    </div>
+    <div class="video-description">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla magnam nemo tenetur? Voluptas nulla et sed, vel, repellendus aliquam, doloribus ipsa in quos ratione excepturi numquam qui blanditiis ut porro!</p>
+    </div>
+  </section>
+    <!--
+      Template fyrir video card section
+      <div class = "grid">
+        <section class = "video row">
+          <h2 class="col">Titill</h2>
+          <div class = "col col-4 video-card">
+            <div class = "video-thumbnail">
+              <img class = "video-image" src="videos/small.png">
+              <div class = "video-timestamp">1:02</div>
+            </div>
+            <div class = "video-info">
+              <h3 class = "video-name">Stóra kanínan fer á kreik</h3>
+              <p class = "video-uploadtime">Fyrir 3 dögum síðan</p>
+            </div>
+          </div>
+          ... eins mörg video card og maður vill
+        </section>
+      </div>
+      ... eins mörg section og maður vill, alltaf grid fyrir foreldri samt
+
+    -->
+    <div class = "grid">
+      <section class = "video row">
+        <h2 class="col">Tengd myndbönd</h2>
+        <div class = "col col-4 col-12-sm video-card">
+          <div class = "video-thumbnail">
+            <img class = "video-image" src="videos/small.png">
+            <div class = "video-timestamp">
+              1:02
+            </div>
+          </div>
+          <div class = "video-info">
+            <h3 class = "video-name">Stóra kanínan fer á kreik</h3>
+            <p class = "video-uploadtime">Fyrir 3 dögum síðan</p>
+          </div>
+        </div>
+        <div class = "col col-4 col-12-sm video-card">
+          <div class = "video-thumbnail">
+            <img class = "video-image" src="videos/bunny.png">
+            <div class = "video-timestamp">
+              1:02
+            </div>
+          </div>
+          <div class = "video-info">
+            <h3 class = "video-name">Stóra kanínan fer á kreik</h3>
+            <p class = "video-uploadtime">Fyrir 3 dögum síðan</p>
+          </div>
+        </div>
+        <div class = "col col-4 col-12-sm video-card">
+          <div class = "video-thumbnail">
+            <img class = "video-image" src="videos/16-9.png">
+            <div class = "video-timestamp">
+              1:02
+            </div>
+          </div>
+          <div class = "video-info">
+            <h3 class = "video-name">Stóra kanínan fer á kreik</h3>
+            <p class = "video-uploadtime">Fyrir 3 dögum síðan</p>
+          </div>
+        </div>
+    </section>
+    <hr class="video-linebrake">
+    </div>
+
+</body>
+<footer>
+  <a href="index.html">Til baka</a>
+</footer>
+</html>
