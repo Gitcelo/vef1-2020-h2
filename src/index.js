@@ -1,13 +1,5 @@
-import { fetchVideos } from './lib/videos';
-
-
-async function now() {
-  const data = await fetchVideos();
-  console.log(data.categories);
-}
-
-
+import { makeVideos } from './lib/videos';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  now();
+  await makeVideos();
 });

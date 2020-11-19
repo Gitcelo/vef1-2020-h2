@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,14 @@
   <title>Hópverkefni 2</title>
   <link rel="stylesheet" href="./dist/styles.css">
 </head>
+
 <body>
   <h1>Fræðslumyndbandaleigan</h1>
 
-    <!--
+  <div class="grid">
+    <div class="bigmomma"></div>
+  </div>
+  <!--
       Template fyrir video card section
       <div class = "grid">
         <section class = "video row">
@@ -30,52 +35,53 @@
       </div>
       ... eins mörg section og maður vill, alltaf grid fyrir foreldri samt
     -->
-    <div class = "grid">
-      <section class = "video row">
-        <h2 class="col">Nýleg myndbönd</h2>
-        <div class = "col col-4 col-12-sm video-card">
-          <div class = "video-thumbnail">
-            <img class = "video-image" src="videos/small.png">
-            <div class = "video-timestamp">
-              1:02
-            </div>
-          </div>
-          <div class = "video-info">
-            <h3 class = "video-name">Stóra kanínan fer á kreik</h3>
-            <p class = "video-uploadtime">Fyrir 3 dögum síðan</p>
+  <div class="grid">
+    <section class="video row">
+      <h2 class="col">Nýleg myndbönd</h2>
+      <div class="col col-4 col-12-sm video-card">
+        <div class="video-thumbnail">
+          <img class="video-image" src="videos/small.png">
+          <div class="video-timestamp">
+            1:02
           </div>
         </div>
-        <div class = "col col-4 col-12-sm video-card">
-          <div class = "video-thumbnail">
-            <img class = "video-image" src="videos/bunny.png">
-            <div class = "video-timestamp">
-              1:02
-            </div>
-          </div>
-          <div class = "video-info">
-            <h3 class = "video-name">Stóra kanínan fer á kreik</h3>
-            <p class = "video-uploadtime">Fyrir 3 dögum síðan</p>
+        <div class="video-info">
+          <h3 class="video-name">Stóra kanínan fer á kreik</h3>
+          <p class="video-uploadtime">Fyrir 3 dögum síðan</p>
+        </div>
+      </div>
+      <div class="col col-4 col-12-sm video-card">
+        <div class="video-thumbnail">
+          <img class="video-image" src="videos/bunny.png">
+          <div class="video-timestamp">
+            1:02
           </div>
         </div>
-        <div class = "col col-4 col-12-sm video-card">
-          <div class = "video-thumbnail">
-            <img class = "video-image" src="videos/16-9.png">
-            <div class = "video-timestamp">
-              1:02
-            </div>
-          </div>
-          <div class = "video-info">
-            <h3 class = "video-name">Stóra kanínan fer á kreik</h3>
-            <p class = "video-uploadtime">Fyrir 3 dögum síðan</p>
+        <div class="video-info">
+          <h3 class="video-name">Stóra kanínan fer á kreik</h3>
+          <p class="video-uploadtime">Fyrir 3 dögum síðan</p>
+        </div>
+      </div>
+      <div class="col col-4 col-12-sm video-card">
+        <div class="video-thumbnail">
+          <img class="video-image" src="videos/16-9.png">
+          <div class="video-timestamp">
+            1:02
           </div>
         </div>
+        <div class="video-info">
+          <h3 class="video-name">Stóra kanínan fer á kreik</h3>
+          <p class="video-uploadtime">Fyrir 3 dögum síðan</p>
+        </div>
+      </div>
     </section>
     <hr class="video-linebrake">
-    </div>
+  </div>
 
 </body>
 <footer>
   <p>&copy Fræðslumyndbandaleigan</p>
 </footer>
 <script src="./dist/bundle.js"></script>
+
 </html>

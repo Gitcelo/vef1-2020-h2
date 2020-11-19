@@ -801,7 +801,66 @@
 	  };
 	}
 
+	/**
+	 * Create an element with attributes and events, and append elements or
+	 * strings to it.
+	 *
+	 * Usage:
+	 *  const el = element(
+	 *    'button',
+	 *    { 'class': 'button' },
+	 *    { click: () => { ... } },
+	 *    'Takki'
+	 *   );
+	 *  returns
+	 *  <button class="button">Takki</button> with a click handler.
+	 *
+	 * @param {string} name Element name
+	 * @param {object} attributes Object containing attributes to attach to element.
+	 * @param {object} events Object of events to add to element.
+	 * @param  {...any} children List of elements or strings to append to element.
+	 * @returns {object} HTML element.
+	 */
+	function element(name) {
+	  var attributes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+	  var events = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	  var el = document.createElement(name);
+
+	  for (var _len = arguments.length, children = new Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
+	    children[_key - 3] = arguments[_key];
+	  }
+
+	  for (var _i = 0, _children = children; _i < _children.length; _i++) {
+	    var child = _children[_i];
+
+	    if (!child) {
+	      continue;
+	    }
+
+	    if (attributes) {
+	      for (var attrib in attributes) {
+	        el.setAttribute(attrib, attributes[attrib]);
+	      }
+	    }
+
+	    if (events) {
+	      for (var event in events) {
+	        el.addEventListener(event, events[event]);
+	      }
+	    }
+
+	    if (typeof child === 'string') {
+	      el.appendChild(document.createTextNode(child));
+	    } else {
+	      el.appendChild(child);
+	    }
+	  }
+
+	  return el;
+	}
+
 	var info = './videos.json';
+
 	function fetchVideos() {
 	  return _fetchVideos.apply(this, arguments);
 	}
@@ -853,13 +912,13 @@
 	  return _fetchVideos.apply(this, arguments);
 	}
 
-	function now() {
-	  return _now.apply(this, arguments);
+	function makeVideos() {
+	  return _makeVideos.apply(this, arguments);
 	}
 
-	function _now() {
-	  _now = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-	    var data;
+	function _makeVideos() {
+	  _makeVideos = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+	    var data, mum, cat, vids;
 	    return regeneratorRuntime.wrap(function _callee2$(_context2) {
 	      while (1) {
 	        switch (_context2.prev = _context2.next) {
@@ -869,16 +928,42 @@
 
 	          case 2:
 	            data = _context2.sent;
-	            console.log(data.categories);
 
-	          case 4:
+	            if (!(data === null)) {
+	              _context2.next = 5;
+	              break;
+	            }
+
+	            return _context2.abrupt("return");
+
+	          case 5:
+	            mum = document.querySelector('.bigmomma');
+	            cat = data.categories;
+	            vids = data.videos;
+	            cat.forEach(function (category) {
+	              mum.appendChild(element('h2', {
+	                'class': 'col'
+	              }, null, category.title));
+	              var vid = category.videos;
+	              vid.forEach(function (video) {
+	                vids.forEach(function (videos) {
+	                  /*if(video === videos.id) {
+	                    daughter.appendChild(
+	                      el()
+	                    )*/
+	                  console.log(videos.id);
+	                });
+	              });
+	            });
+
+	          case 10:
 	          case "end":
 	            return _context2.stop();
 	        }
 	      }
 	    }, _callee2);
 	  }));
-	  return _now.apply(this, arguments);
+	  return _makeVideos.apply(this, arguments);
 	}
 
 	document.addEventListener('DOMContentLoaded', /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
@@ -886,9 +971,10 @@
 	    while (1) {
 	      switch (_context.prev = _context.next) {
 	        case 0:
-	          now();
+	          _context.next = 2;
+	          return makeVideos();
 
-	        case 1:
+	        case 2:
 	        case "end":
 	          return _context.stop();
 	      }
