@@ -23,7 +23,7 @@
     "stylelint-config-standard": "^20.0.0"
   },
   "scripts": {
-    "test:eslint": "eslint ./src/index.js ./src/*.js --fix",
+    "test:eslint": "eslint ./src/index.js ./src/lib/*.js  --fix",
     "test:stylelint": "stylelint ./src/styles/*.scss --syntax scss",
     "test": "concurrently npm:test:*",
     "lint": "stylelint styles.scss ./**/*.scss",

@@ -3,13 +3,10 @@ import { el, element, formatTime } from './utils'
 
 
 
-function rewind() {
+function setTime(time) {
   let myVideo = document.getElementById('myVideo');
-  t = myVideo.currentTime;
-  if (t < 3)
-    myVideo.currentTime = 0;
-  else
-    myVideo.currentTime = t - 3;
+
+  myVideo.currentTime += time;
 }
 
 function playToggle() {
@@ -17,14 +14,14 @@ function playToggle() {
   let play = document.getElementById("play");
   let pause = document.getElementById("pause");
 
-  if (myVideo.paused) {
+  if (myVideo.paused)
     myVideo.play();
-  }
-  else {
+  else
     myVideo.pause();
-  }
+
   play.classList.toggle('button__active');
   pause.classList.toggle('button__active');
+
 }
 
 
@@ -32,17 +29,15 @@ function soundToggle() {
 
   let myVideo = document.getElementById('myVideo');
   let mute = document.getElementById('mute');
-  let parent = mute.parentNode;
-  if (myVideo.muted) {
+  let unmute = document.getElementById('unmute');
+
+  if (myVideo.muted)
     myVideo.muted = false;
-    parent.removeChild(parent.firstChild);
-    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/unmute.svg', 'id': 'mute'}, null, ' '));
-  }
-  else {
+  else
     myVideo.muted = true;
-    parent.removeChild(parent.firstChild);
-    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/mute.svg', 'id': 'mute'}, null, ' '));
-  }
+
+    mute.classList.toggle('button__active');
+    unmute.classList.toggle('button__active');
 }
 
 function fullScreen() {
@@ -50,14 +45,19 @@ function fullScreen() {
   myVideo.requestFullscreen();
 }
 
-function fastForward() {
-  let myVideo = document.getElementById('myVideo');
-  myVideo.currentTime = myVideo.currentTime + 3;
-}
 
 export async function displayVideo() {
   let data = await fetchVideos();
-  let videoID = Number(/\?id=([^\?]+)/.exec(window.location.href)[1]);
+
+  let videoID = window.location.href;
+  videoID = videoID.split('?')[1];
+  videoID = videoID.split('&')[0];
+  videoID = videoID.split('=')[1];
+  videoID = Number(videoID);
+
+
+  //let videoID = Number(/\?id=([^\?]+)/.exec(window.location.href)[1]);
+
   let video = await search(videoID, data.videos);
   console.log(video);
 
@@ -92,7 +92,7 @@ export async function displayVideo() {
           element('source', { 'src': video.video, 'type': 'video/mp4' }, null, ' ')
         ),
         element('div', { 'class': 'video-controls' }, null,
-          element('button', { 'class': 'video-controls__button' }, {click : rewind },
+          element('button', { 'class': 'video-controls__button' }, {click : () => {setTime(-3)} },
             element('img', { 'class':'video-controls__img', 'src':'img/back.svg', 'id': 'rewind'}, null, ' ')
           ),
           element('button', { 'class': 'video-controls__button' }, {click : playToggle },
@@ -106,7 +106,7 @@ export async function displayVideo() {
           element('button', { 'class': 'video-controls__button' }, {click : fullScreen },
             element('img', { 'class':'video-controls__img', 'src':'img/fullscreen.svg', 'id': 'fullScreen'}, null, ' ')
           ),
-          element('button', { 'class': 'video-controls__button' }, {click : fastForward },
+          element('button', { 'class': 'video-controls__button' }, {click : () => {setTime(3)} },
             element('img', { 'class':'video-controls__img', 'src':'img/next.svg', 'id': 'forward'}, null, ' ')
           )
         ),
