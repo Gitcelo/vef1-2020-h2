@@ -1,12 +1,12 @@
 import { fetchVideos, search, timeStamp, goToVideo } from './videos';
-import { el, element } from './utils'
+import { el, element, formatTime } from './utils'
 
 
 
 function rewind() {
   let myVideo = document.getElementById('myVideo');
   t = myVideo.currentTime;
-  if (t < 3) 
+  if (t < 3)
     myVideo.currentTime = 0;
   else
     myVideo.currentTime = t - 3;
@@ -18,10 +18,10 @@ function playToggle() {
   let pause = document.getElementById("pause");
 
   if (myVideo.paused) {
-    myVideo.play(); 
+    myVideo.play();
   }
   else {
-    myVideo.pause(); 
+    myVideo.pause();
   }
   play.classList.toggle('button__active');
   pause.classList.toggle('button__active');
@@ -34,7 +34,7 @@ function soundToggle() {
   let mute = document.getElementById('mute');
   let parent = mute.parentNode;
   if (myVideo.muted) {
-    myVideo.muted = false; 
+    myVideo.muted = false;
     parent.removeChild(parent.firstChild);
     parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/unmute.svg', 'id': 'mute'}, null, ' '));
   }
@@ -77,7 +77,7 @@ export async function displayVideo() {
           ),
         element('div', { 'class': 'video-info' }, null,
           element('h3', { 'class': 'video-name'}, null, value.title),
-          element('p', { 'class': 'video-uploadtime'}, null, `${value.created}`)
+          element('p', { 'class': 'video-uploadtime'}, null, formatTime(value.created))
           )
         )
     ;
@@ -86,7 +86,7 @@ export async function displayVideo() {
 
   body.appendChild(
     el('main',
-      element('section', { 'class': 'video-view grid' }, null, 
+      element('section', { 'class': 'video-view grid' }, null,
         el('h1', video.title),
         element('video', {'id': 'myVideo'}, null,
           element('source', { 'src': video.video, 'type': 'video/mp4' }, null, ' ')
@@ -110,7 +110,7 @@ export async function displayVideo() {
             element('img', { 'class':'video-controls__img', 'src':'img/next.svg', 'id': 'forward'}, null, ' ')
           )
         ),
-        element('div', { 'class':'video-description'}, null, 
+        element('div', { 'class':'video-description'}, null,
           el('p', video.description)
         )
       ),
@@ -118,11 +118,11 @@ export async function displayVideo() {
     )
   );
   body.appendChild(
-    el('footer', 
+    el('footer',
       element('a', { 'href':'index.html' }, null, 'Til baka')
     )
   );
-  
+
   document.getElementById('myVideo').addEventListener('ended', () => {
     document.getElementById('pause').classList.add('button__active');
     document.getElementById('play').classList.remove('button__active');

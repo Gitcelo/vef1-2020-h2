@@ -1,4 +1,4 @@
-import { formatDate, element } from './utils'
+import { element, formatTime } from './utils'
 
 const info = './videos.json';
 const URL = 'video.html?id=';
@@ -43,7 +43,6 @@ export async function makeVideos() {
   const elem = document.createElement('section');
   elem.setAttribute('class', 'video row');
   mum.appendChild(element('section', { 'class': 'video row' }, null, ''));
-  //mum.appendChild(element('hr', { 'class': 'video-linebrake' }, null, ' '));
   console.log(mum.firstElementChild);
   const cat = data.categories;
   const videodata = data.videos;
@@ -56,14 +55,14 @@ export async function makeVideos() {
     videocat.forEach((videoid) => {
       const value = search(videoid, videodata);
       const daughter =
-        element('div', { 'class': 'col col-4 col-12-sm video-card' }, { click: () => {goToVideo(value.id)}},
-          element('div', { 'class': 'video-thumbnail' }, null,
+        element('div', { 'class': 'col col-4 col-12-sm video-card' }, null,
+          element('div', { 'class': 'video-thumbnail' }, { click: () => {goToVideo(value.id)}},
             element('img', { 'class': 'video-image', 'src': value.poster, 'alt': '' }, null, ' '),
             element('div', { 'class': 'video-timestamp' }, null, timeStamp(value.duration))
           ),
           element('div', { 'class': 'video-info' }, null,
-            element('h3', { 'class': 'video-name' }, null, value.title),
-            element('p', { 'class': 'video-uploadtime' }, null, `${value.created}`)
+            element('h3', { 'class': 'video-name' }, { click: () => {goToVideo(value.id)}}, value.title),
+            element('p', { 'class': 'video-uploadtime' }, null, formatTime(value.created))
           )
         );
       elem.appendChild(daughter);

@@ -44,5 +44,8 @@
   "bugs": {
     "url": "https://github.com/Gitcelo/vef1-2020-h2/issues"
   },
-  "homepage": "https://github.com/Gitcelo/vef1-2020-h2#readme"
+  "homepage": "https://github.com/Gitcelo/vef1-2020-h2#readme",
+  "dependencies": {
+    "date-fns": "^2.16.1"
+  }
 }
