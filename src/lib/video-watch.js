@@ -1,4 +1,4 @@
-import { fetchVideos, search } from './videos';
+import { fetchVideos, search, timeStamp } from './videos';
 import { el, element } from './utils'
 
 
@@ -35,23 +35,20 @@ export async function displayVideo() {
   );
 
   video.related.forEach(id => {
-    let relatedVideo = search(id, data.videos);
-    console.log(relatedVideo)
-    if (relatedVideo == null){
-
-    }
-    else{
-      const daughter = element('div', { 'class':'col col-4 col-12-sm video-card' }, null, 
-        element('div', { 'class': 'video-thumbnail' }, null, 
-          element('img', { 'class':'video-image', 'src': relatedVideo.poster, 'alt':'' }, ' ')
-        ),
-        element('div', {'class':'video-info'}, null, 
-          element('h3', {'class':'video-name'}, null, relatedVideo.title),
-          element('p', {'class':'video-upload'}, null, `Fyrir ${relatedVideo.created} dögum síðan`)
+    const value = search(id, data.videos);
+    const daughter =
+      element('div', { 'class': 'col col-4 col-12-sm video-card'}, null,
+        element('div', { 'class': 'video-thumbnail' }, null,
+          element('img', { 'class': 'video-image', 'src': value.poster, 'alt': ''}, null, 'hehe'),
+          element('div', { 'class': 'video-timestamp' }, null, timeStamp(value.duration))
+          ),
+        element('div', { 'class': 'video-info' }, null,
+          element('h3', { 'class': 'video-name'}, null, value.title),
+          element('p', { 'class': 'video-uploadtime'}, null, `${value.created}`)
+          )
         )
-      );
-      tengdMyndbond.appendChild(daughter);
-    }
+    ;
+    tengdMyndbond.appendChild(daughter);
   });
 
   body.appendChild(
@@ -76,7 +73,7 @@ export async function displayVideo() {
           element('button', { 'class': 'video-controls__button' }, {click : fullScreen },
             element('img', { 'class':'video-controls__img', 'src':'img/fullscreen.svg'}, null, " ")
           ),
-          element('button', { 'class': 'video-controls__button' }, {click : fastForward() },
+          element('button', { 'class': 'video-controls__button' }, {click : fastForward },
             element('img', { 'class':'video-controls__img', 'src':'img/next.svg'}, null, " ")
           )
         ),
@@ -84,7 +81,12 @@ export async function displayVideo() {
           el('p', video.description)
         )
       ),
-      tengdMyndbond
+      element('div', { 'class':'grid'}, null, tengdMyndbond)
     )
   );
+  body.appendChild(
+    el('footer', 
+      element('a', { 'href':'index.html' }, null, 'Til baka')
+    )
+  )
 }
