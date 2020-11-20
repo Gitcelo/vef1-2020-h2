@@ -59,3 +59,15 @@ export function element(name, attributes = null, events = null, ...children) {
 export function el(name, ...children) {
   return element(name, null, null, ...children);
 }
+
+/**
+ * Format a timestamp as dd.mm.yyyy hh:mm:ss e.g. "01.11.2020 12:00:00".
+ *
+ * @param {number} timestamp Unix timestamp to format
+ * @returns {string} Formatted string.
+ */
+export function formatDate(timestamp) {
+  // TODO Útfæra með „vanilla JS“ eða nota date-fns pakka
+  let newTimestamp = format(new Date(timestamp), 'dd.MM.yyyy hh:mm:ss');
+  return newTimestamp;
+}
