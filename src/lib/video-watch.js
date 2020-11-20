@@ -1,10 +1,10 @@
-import { fetchVideos, search, timeStamp, goToVideo } from './videos';
-import { el, element, formatTime } from './utils'
-
-
+import {
+  fetchVideos, search, timeStamp, goToVideo,
+} from './videos';
+import { el, element, formatTime } from './utils';
 
 function setTime(time) {
-  let myVideo = document.getElementById('myVideo');
+  const myVideo = document.getElementById('myVideo');
 
   myVideo.currentTime += time;
 }
@@ -15,40 +15,33 @@ function playToggle() {
   let pause = document.getElementById("pause");
   let overlay = document.getElementById('overlay');
 
-  if (myVideo.paused)
-    myVideo.play();
-  else
-    myVideo.pause();
+  if (myVideo.paused) myVideo.play();
+  else myVideo.pause();
 
   play.classList.toggle('button__active');
   pause.classList.toggle('button__active');
   overlay.classList.toggle('button__active');
 }
 
-
 function soundToggle() {
+  const myVideo = document.getElementById('myVideo');
+  const mute = document.getElementById('mute');
+  const unmute = document.getElementById('unmute');
 
-  let myVideo = document.getElementById('myVideo');
-  let mute = document.getElementById('mute');
-  let unmute = document.getElementById('unmute');
+  if (myVideo.muted) myVideo.muted = false;
+  else myVideo.muted = true;
 
-  if (myVideo.muted)
-    myVideo.muted = false;
-  else
-    myVideo.muted = true;
-
-    mute.classList.toggle('button__active');
-    unmute.classList.toggle('button__active');
+  mute.classList.toggle('button__active');
+  unmute.classList.toggle('button__active');
 }
 
 function fullScreen() {
-  let myVideo = document.getElementById('myVideo');
+  const myVideo = document.getElementById('myVideo');
   myVideo.requestFullscreen();
 }
 
-
 export async function displayVideo() {
-  let data = await fetchVideos();
+  const data = await fetchVideos();
 
   let videoID = window.location.href;
   videoID = videoID.split('?')[1];
@@ -56,38 +49,31 @@ export async function displayVideo() {
   videoID = videoID.split('=')[1];
   videoID = Number(videoID);
 
+  // let videoID = Number(/\?id=([^\?]+)/.exec(window.location.href)[1]);
 
-  //let videoID = Number(/\?id=([^\?]+)/.exec(window.location.href)[1]);
-
-  let video = await search(videoID, data.videos);
+  const video = await search(videoID, data.videos);
   console.log(video);
 
-  let body = document.querySelector('body');
+  const body = document.querySelector('body');
 
-  let tengdMyndbond = element('section', {'class':'video row'}, null,
-    element('h2', {'class': 'col'}, null, 'Tengd myndbönd')
-  );
+  const tengdMyndbond = element('section', { class: 'video row' }, null,
+    element('h2', { class: 'col' }, null, 'Tengd myndbönd'));
 
-  video.related.forEach(id => {
+  video.related.forEach((id) => {
     const value = search(id, data.videos);
-    const daughter =
-      element('div', { 'class': 'col col-4 col-12-sm video-card'}, { click: () => { goToVideo(value.id)} },
-        element('div', { 'class': 'video-thumbnail' }, null,
-          element('img', { 'class': 'video-image', 'src': value.poster, 'alt': ''}, null, 'hehe'),
-          element('div', { 'class': 'video-timestamp' }, null, timeStamp(value.duration))
-          ),
-        element('div', { 'class': 'video-info' }, null,
-          element('h3', { 'class': 'video-name'}, null, value.title),
-          element('p', { 'class': 'video-uploadtime'}, null, formatTime(value.created))
-          )
-        )
-    ;
+    const daughter = element('div', { class: 'col col-4 col-12-sm video-card' }, { click: () => { goToVideo(value.id); } },
+      element('div', { class: 'video-thumbnail' }, null,
+        element('img', { class: 'video-image', src: value.poster, alt: '' }, null, 'hehe'),
+        element('div', { class: 'video-timestamp' }, null, timeStamp(value.duration))),
+      element('div', { class: 'video-info' }, null,
+        element('h3', { class: 'video-name' }, null, value.title),
+        element('p', { class: 'video-uploadtime' }, null, formatTime(value.created))));
     tengdMyndbond.appendChild(daughter);
   });
 
   body.appendChild(
     el('main',
-      element('section', { 'class': 'video-view grid' }, null,
+      element('section', { class: 'video-view grid' }, null,
         el('h1', video.title),
         element('div', {'class':'video-container'}, null,
           element('video', {'id': 'myVideo'}, {click: playToggle},
@@ -125,8 +111,7 @@ export async function displayVideo() {
   );
   body.appendChild(
     el('footer',
-      element('a', { 'href':'index.html' }, null, 'Til baka')
-    )
+      element('a', { href: 'index.html' }, null, 'Til baka')),
   );
 
   document.getElementById('myVideo').addEventListener('ended', () => {
