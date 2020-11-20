@@ -45,9 +45,19 @@ function fullScreen() {
   myVideo.requestFullscreen();
 }
 
+
 export async function displayVideo() {
   let data = await fetchVideos();
-  let videoID = Number(/\?id=([^\?]+)/.exec(window.location.href)[1]);
+
+  let videoID = window.location.href;
+  videoID = videoID.split('?')[1];
+  videoID = videoID.split('&')[0];
+  videoID = videoID.split('=')[1];
+  videoID = Number(videoID);
+
+
+  //let videoID = Number(/\?id=([^\?]+)/.exec(window.location.href)[1]);
+  
   let video = await search(videoID, data.videos);
   console.log(video);
 
