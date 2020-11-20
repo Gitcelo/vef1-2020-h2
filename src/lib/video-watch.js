@@ -1,4 +1,4 @@
-import { fetchVideos, search, timeStamp } from './videos';
+import { fetchVideos, search, timeStamp, goToVideo } from './videos';
 import { el, element } from './utils'
 
 
@@ -37,7 +37,7 @@ export async function displayVideo() {
   video.related.forEach(id => {
     const value = search(id, data.videos);
     const daughter =
-      element('div', { 'class': 'col col-4 col-12-sm video-card'}, null,
+      element('div', { 'class': 'col col-4 col-12-sm video-card'}, { click: () => { goToVideo(value.id)} },
         element('div', { 'class': 'video-thumbnail' }, null,
           element('img', { 'class': 'video-image', 'src': value.poster, 'alt': ''}, null, 'hehe'),
           element('div', { 'class': 'video-timestamp' }, null, timeStamp(value.duration))
@@ -88,5 +88,5 @@ export async function displayVideo() {
     el('footer', 
       element('a', { 'href':'index.html' }, null, 'Til baka')
     )
-  )
+  );
 }
