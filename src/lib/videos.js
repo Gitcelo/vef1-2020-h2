@@ -54,8 +54,8 @@ export async function makeVideos() {
     videocat.forEach((videoid) => {
       const value = search(videoid, videodata);
       const daughter =
-        element('div', { 'class': 'col col-4 col-12-sm video-card' }, null,
-          element('div', { 'class': 'video-thumbnail' }, { click: () => {goToVideo(value.id)}},
+        element('div', { 'class': 'col col-4 col-12-sm video-card' }, { click: () => {goToVideo(value.id)}},
+          element('div', { 'class': 'video-thumbnail' }, null,
             element('img', { 'class': 'video-image', 'src': value.poster, 'alt': '' }, null, ' '),
             element('div', { 'class': 'video-timestamp' }, null, timeStamp(value.duration))
           ),

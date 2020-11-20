@@ -1241,13 +1241,13 @@
 	                var value = search(videoid, videodata);
 	                var daughter = element('div', {
 	                  'class': 'col col-4 col-12-sm video-card'
-	                }, null, element('div', {
-	                  'class': 'video-thumbnail'
 	                }, {
 	                  click: function click() {
 	                    goToVideo(value.id);
 	                  }
-	                }, element('img', {
+	                }, element('div', {
+	                  'class': 'video-thumbnail'
+	                }, null, element('img', {
 	                  'class': 'video-image',
 	                  'src': value.poster,
 	                  'alt': ''
