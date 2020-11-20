@@ -13,6 +13,7 @@ function playToggle() {
   let myVideo = document.getElementById("myVideo");
   let play = document.getElementById("play");
   let pause = document.getElementById("pause");
+  let overlay = document.getElementById('overlay');
 
   if (myVideo.paused)
     myVideo.play();
@@ -21,7 +22,7 @@ function playToggle() {
 
   play.classList.toggle('button__active');
   pause.classList.toggle('button__active');
-
+  overlay.classList.toggle('button__active');
 }
 
 
@@ -88,8 +89,13 @@ export async function displayVideo() {
     el('main',
       element('section', { 'class': 'video-view grid' }, null,
         el('h1', video.title),
-        element('video', {'id': 'myVideo'}, null,
-          element('source', { 'src': video.video, 'type': 'video/mp4' }, null, ' ')
+        element('div', {'class':'video-container'}, null,
+          element('video', {'id': 'myVideo'}, {click: playToggle},
+            element('source', { 'src': video.video, 'type': 'video/mp4' }, null, ' ')
+          ),
+          element('div', {'class':'video-overlay', 'id':'overlay'}, {click: playToggle}, 
+            element('img', {'class':'video-playbutton', 'src':'img/play.svg'}, null, ' ')
+          )
         ),
         element('div', { 'class': 'video-controls' }, null,
           element('button', { 'class': 'video-controls__button' }, {click : () => {setTime(-3)} },

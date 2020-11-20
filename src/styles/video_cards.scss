@@ -9,6 +9,27 @@
     cursor: pointer;
   }
 
+  &-container {
+    position: relative;
+  }
+
+  &-overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.2);
+    
+  }
+
+  &-playbutton {
+    position: absolute;
+    top: calc(50% - 30px);
+    left: calc(50% - 30px);
+    width: 60px;
+  }
+
   &-thumbnail {
     display: flex;
     position: relative;
