@@ -20,17 +20,6 @@ async function fetchVideos() {
   return null;
 }
 
-<<<<<<< HEAD
-export function timeStamp(time) {
-  let minutes = Math.floor(time/60);
-  let seconds = time%60;
-  seconds = (seconds<10) ? '0' + seconds : seconds;
-  return minutes + ":" + seconds;
-}
-
-export function search(video, videos){
-  for(let i = 0; i<videos.length;i+=1) {
-=======
 function timeStamp(time) {
   let minutes = Math.floor(time / 60);
   let seconds = time % 60;
@@ -40,7 +29,6 @@ function timeStamp(time) {
 
 function search(video, videos) {
   for (let i = 0; i < videos.length; i += 1) {
->>>>>>> endurrada-videos
     if (video === videos[i].id) return videos[i];
   }
 }
