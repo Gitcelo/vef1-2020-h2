@@ -16,7 +16,7 @@ export async function fetchVideos(){
   return null;
 }
 
-function timeStamp(time) {
+export function timeStamp(time) {
   let minutes = Math.floor(time/60);
   let seconds = time%60;
   seconds = (seconds<10) ? '0' + seconds : seconds;
