@@ -912,8 +912,11 @@
 	  return _fetchVideos.apply(this, arguments);
 	}
 
-	function hour(time) {
-	  return time / 3600;
+	function timeStamp(time) {
+	  var minutes = Math.floor(time / 60);
+	  var seconds = time % 60;
+	  seconds = seconds < 10 ? '0' + seconds : seconds;
+	  return minutes + ":" + seconds;
 	}
 
 	function search(video, videos) {
@@ -956,7 +959,6 @@
 	            cat = data.categories;
 	            vids = data.videos;
 	            cat.forEach(function (category) {
-	              console.log(category);
 	              elem.appendChild(element('h2', {
 	                'class': 'col'
 	              }, null, category.title));
@@ -973,7 +975,7 @@
 	                  'alt': ''
 	                }, null, 'hehe'), element('div', {
 	                  'class': 'video-timestamp'
-	                }, null, "".concat(hour(value.duration)))), element('div', {
+	                }, null, timeStamp(value.duration))), element('div', {
 	                  'class': 'video-info'
 	                }, null, element('h3', {
 	                  'class': 'video-name'

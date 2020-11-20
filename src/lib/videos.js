@@ -1,4 +1,4 @@
-import { el, element } from './utils'
+import { formatDate, element } from './utils'
 
 const info = './videos.json';
 
@@ -16,8 +16,11 @@ async function fetchVideos(){
   return null;
 }
 
-function hour(time) {
-  return time/3600;
+function timeStamp(time) {
+  let minutes = Math.floor(time/60);
+  let seconds = time%60;
+  seconds = (seconds<10) ? '0' + seconds : seconds;
+  return minutes + ":" + seconds;
 }
 
 function search(video, videos){
@@ -38,7 +41,6 @@ export async function makeVideos() {
   const cat = data.categories;
   const vids = data.videos;
   cat.forEach((category) => {
-    console.log(category);
     elem.appendChild(element('h2', { 'class': 'col' }, null, category.title));
     const vid = category.videos;
     vid.forEach((video) => {
@@ -47,7 +49,7 @@ export async function makeVideos() {
             element('div', { 'class': 'col col-4 col-12-sm video-card'}, null,
               element('div', { 'class': 'video-thumbnail' }, null,
                 element('img', { 'class': 'video-image', 'src': value.poster, 'alt': ''}, null, 'hehe'),
-                element('div', { 'class': 'video-timestamp' }, null, `${hour(value.duration)}`)
+                element('div', { 'class': 'video-timestamp' }, null, timeStamp(value.duration))
                 ),
               element('div', { 'class': 'video-info' }, null,
                 element('h3', { 'class': 'video-name'}, null, value.title),
