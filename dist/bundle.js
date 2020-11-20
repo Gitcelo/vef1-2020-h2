@@ -1130,6 +1130,7 @@
 	}
 
 	var info = './videos.json';
+	var URL = 'video.html?id=';
 	function fetchVideos() {
 	  return _fetchVideos.apply(this, arguments);
 	}
@@ -1192,9 +1193,9 @@
 	    if (video === videos[i].id) return videos[i];
 	  }
 	}
-
-	function goToVideo(id) {}
-
+	function goToVideo(id) {
+	  window.location.href = "".concat(URL).concat(id);
+	}
 	function makeVideos() {
 	  return _makeVideos.apply(this, arguments);
 	}

@@ -1,6 +1,7 @@
 import { formatDate, element } from './utils'
 
 const info = './videos.json';
+const URL = 'video.html?id=';
 
 export async function fetchVideos(){
   let result;
@@ -29,8 +30,8 @@ export function search(video, videos) {
   }
 }
 
-function goToVideo(id) {
-
+export function goToVideo(id) {
+  window.location.href = `${URL}${id}`;
 }
 
 export async function makeVideos() {
