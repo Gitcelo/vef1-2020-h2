@@ -63,8 +63,10 @@
   }
 }
 
-.button__active {
-  display: none;
+.button {
+  &__active {
+    display: none;
+  }
 }
 
 video {

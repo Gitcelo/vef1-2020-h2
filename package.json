@@ -26,7 +26,7 @@
     "test:eslint": "eslint ./src/index.js ./src/lib/*.js  --fix",
     "test:stylelint": "stylelint ./src/styles/*.scss --syntax scss",
     "test": "concurrently npm:test:*",
-    "lint": "stylelint styles.scss ./**/*.scss",
+    "lint": "stylelint ./**/*.scss",
     "build:rollup": "rollup -c",
     "build:sass": "node-sass --source-map-embed ./src/styles/styles.scss ./dist/styles.css",
     "build": "concurrently npm:build:*",

@@ -1,5 +1,3 @@
-import { format } from "date-fns";
-
 /**
  * Create an element with attributes and events, and append elements or
  * strings to it.
@@ -20,8 +18,10 @@ import { format } from "date-fns";
  * @param  {...any} children List of elements or strings to append to element.
  * @returns {object} HTML element.
  */
+/* eslint-disable*/ //Disable-um því við fengum fallið frá Óla og viljum ekki fikta í því
 export function element(name, attributes = null, events = null, ...children) {
-  const el = document.createElement(name);
+
+  const elem = document.createElement(name);
 
   for (const child of children) {
     if (!child) {
@@ -30,25 +30,26 @@ export function element(name, attributes = null, events = null, ...children) {
 
     if (attributes) {
       for (const attrib in attributes) {
-        el.setAttribute(attrib, attributes[attrib]);
+        elem.setAttribute(attrib, attributes[attrib]);
       }
     }
 
     if (events) {
       for (const event in events) {
-        el.addEventListener(event, events[event]);
+        elem.addEventListener(event, events[event]);
       }
     }
 
     if (typeof child === 'string') {
-      el.appendChild(document.createTextNode(child));
+      elem.appendChild(document.createTextNode(child));
     } else {
-      el.appendChild(child);
+      elem.appendChild(child);
     }
   }
 
-  return el;
+  return elem;
 }
+/* eslint-enable */
 
 /**
  * Simplified element function.
@@ -76,14 +77,14 @@ export function formatTime(milliseconds) {
   if (hour <= 24) return `Fyrir ${hour} klukkustundum síðan`;
   const day = Math.floor(hour / 24);
   if (day === 1) return 'Fyrir 1 degi síðan';
-  if(day<=7) return `Fyrir ${day} dögum síðan`;
-  const week = Math.floor(day/7);
-  if(week===1) return 'Fyrir 1 viku síðan';
-  if(week<=4) return `Fyrir ${week} vikum síðan`;
-  const month = Math.floor(day/30);
-  if(month===1) return 'Fyrir 1 mánuði síðan';
-  if(month<=11) return `Fyrir ${month} mánuðum síðan`;
-  const year = Math.floor(month/12);
-  if(year===1) return 'Fyrir 1 ári síðan';
+  if (day <= 7) return `Fyrir ${day} dögum síðan`;
+  const week = Math.floor(day / 7);
+  if (week === 1) return 'Fyrir 1 viku síðan';
+  if (week <= 4) return `Fyrir ${week} vikum síðan`;
+  const month = Math.floor(day / 30);
+  if (month === 1) return 'Fyrir 1 mánuði síðan';
+  if (month <= 11) return `Fyrir ${month} mánuðum síðan`;
+  const year = Math.floor(month / 12);
+  if (year === 1) return 'Fyrir 1 ári síðan';
   return `Fyrir ${year} árum síðan`;
 }
