@@ -2,20 +2,40 @@ import { fetchVideos, search, timeStamp, goToVideo } from './videos';
 import { el, element } from './utils'
 
 
+
 function rewind() {
 
 }
 
 function playToggle() {
+  let myVideo = document.getElementById("myVideo");
+  let play = document.getElementById("play");
+  let parent = play.parentNode;
 
+  if (myVideo.paused) {
+    myVideo.play(); 
+    parent.removeChild(parent.firstChild);
+    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/pause.svg', 'id': 'play'}, null, " "));
+    console.log(parent.firstChild);
+  }
+  else {
+    myVideo.pause(); 
+    parent.removeChild(parent.firstChild);
+    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, " "));
+  }
 }
 
-function soundToggle() {
 
+function soundToggle() {
+  if (myVideo.muted) 
+    myVideo.muted = false; 
+  else 
+    myVideo.muted = true;
 }
 
 function fullScreen() {
-
+  let myVideo = document.getElementById("myVideo");
+  myVideo.requestFullscreen();
 }
 
 function fastForward() {
@@ -55,7 +75,7 @@ export async function displayVideo() {
     el('main',
       element('section', { 'class': 'video-view grid' }, null, 
         el('h1', video.title),
-        el('video',
+        element('video', {'id': 'myVideo'}, null,
           element('source', { 'src': video.video, 'type': 'video/mp4' }, null, ' ')
         ),
         element('div', { 'class': 'video-controls' }, null,
@@ -63,15 +83,14 @@ export async function displayVideo() {
             element('img', { 'class':'video-controls__img', 'src':'img/back.svg'}, null, " ")
           ),
           element('button', { 'class': 'video-controls__button' }, {click : playToggle },
-            element('img', { 'class':'video-controls__img button__active', 'src':'img/pause.svg'}, null, " "),
-            element('img', { 'class':'video-controls__img button__unactive', 'src':'img/play.svg'}, null, " ")
+            element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, " ")
           ),
           element('button', { 'class': 'video-controls__button' }, {click : soundToggle },
-            element('img', { 'class':'video-controls__img button__active', 'src':'img/unmute.svg'}, null, " "),
-            element('img', { 'class':'video-controls__img button__unactive', 'src':'img/mute.svg'}, null, " ")
+            element('img', { 'class':'video-controls__img', 'src':'img/unmute.svg'}, null, " "),
+            element('img', { 'class':'video-controls__img', 'src':'img/mute.svg'}, null, " ")
           ),
           element('button', { 'class': 'video-controls__button' }, {click : fullScreen },
-            element('img', { 'class':'video-controls__img', 'src':'img/fullscreen.svg'}, null, " ")
+            element('img', { 'class':'video-controls__img', 'src':'img/fullscreen.svg', 'id': 'fullScreen'}, null, " ")
           ),
           element('button', { 'class': 'video-controls__button' }, {click : fastForward },
             element('img', { 'class':'video-controls__img', 'src':'img/next.svg'}, null, " ")
