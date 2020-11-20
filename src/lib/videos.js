@@ -2,7 +2,7 @@ import { el, element } from './utils'
 
 const info = './videos.json';
 
-async function fetchVideos(){
+export async function fetchVideos(){
   let result;
   try {
     result = await fetch(info);
@@ -20,7 +20,7 @@ function hour(time) {
   return time/3600;
 }
 
-function search(video, videos){
+export function search(video, videos){
   for(let i = 0; i<videos.length;i+=1) {
     if (video === videos[i].id) return videos[i];
   }
