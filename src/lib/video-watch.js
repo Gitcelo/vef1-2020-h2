@@ -10,10 +10,10 @@ function setTime(time) {
 }
 
 function playToggle() {
-  let myVideo = document.getElementById("myVideo");
-  let play = document.getElementById("play");
-  let pause = document.getElementById("pause");
-  let overlay = document.getElementById('overlay');
+  const myVideo = document.getElementById('myVideo');
+  const play = document.getElementById('play');
+  const pause = document.getElementById('pause');
+  const overlay = document.getElementById('overlay');
 
   if (myVideo.paused) myVideo.play();
   else myVideo.pause();
@@ -40,19 +40,19 @@ function fullScreen() {
   myVideo.requestFullscreen();
 }
 
-export async function displayVideo() {
+export default async function displayVideo() {
   const data = await fetchVideos();
 
   let videoID = window.location.href;
-  videoID = videoID.split('?')[1];
-  videoID = videoID.split('&')[0];
-  videoID = videoID.split('=')[1];
-  videoID = Number(videoID);
+  const videoIDA = videoID.split('?')[1];
+  const videoIDB = videoIDA.split('&')[0];
+  const videoIDC = videoIDB.split('=')[1];
+  const videoIDD = Number(videoIDC);
+  videoID = videoIDD;
 
   // let videoID = Number(/\?id=([^\?]+)/.exec(window.location.href)[1]);
 
   const video = await search(videoID, data.videos);
-  console.log(video);
 
   const body = document.querySelector('body');
 
@@ -75,39 +75,27 @@ export async function displayVideo() {
     el('main',
       element('section', { class: 'video-view grid' }, null,
         el('h1', video.title),
-        element('div', {'class':'video-container'}, null,
-          element('video', {'id': 'myVideo'}, {click: playToggle},
-            element('source', { 'src': video.video, 'type': 'video/mp4' }, null, ' ')
-          ),
-          element('div', {'class':'video-overlay', 'id':'overlay'}, {click: playToggle}, 
-            element('img', {'class':'video-playbutton', 'src':'img/play.svg'}, null, ' ')
-          )
-        ),
-        element('div', { 'class': 'video-controls' }, null,
-          element('button', { 'class': 'video-controls__button' }, {click : () => {setTime(-3)} },
-            element('img', { 'class':'video-controls__img', 'src':'img/back.svg', 'id': 'rewind'}, null, ' ')
-          ),
-          element('button', { 'class': 'video-controls__button' }, {click : playToggle },
-            element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, " "),
-            element('img', { 'class':'video-controls__img button__active', 'src':'img/pause.svg', 'id': 'pause'}, null, " ")
-          ),
-          element('button', { 'class': 'video-controls__button' }, {click : soundToggle },
-            element('img', { 'class':'video-controls__img button__active', 'src':'img/unmute.svg', 'id': 'unmute'}, null, " "),
-            element('img', { 'class':'video-controls__img', 'src':'img/mute.svg', 'id': 'mute'}, null, " ")
-          ),
-          element('button', { 'class': 'video-controls__button' }, {click : fullScreen },
-            element('img', { 'class':'video-controls__img', 'src':'img/fullscreen.svg', 'id': 'fullScreen'}, null, ' ')
-          ),
-          element('button', { 'class': 'video-controls__button' }, {click : () => {setTime(3)} },
-            element('img', { 'class':'video-controls__img', 'src':'img/next.svg', 'id': 'forward'}, null, ' ')
-          )
-        ),
-        element('div', { 'class':'video-description'}, null,
-          el('p', video.description)
-        )
-      ),
-      element('div', { 'class':'grid'}, null, tengdMyndbond)
-    )
+        element('div', { class: 'video-container' }, null,
+          element('video', { id: 'myVideo' }, { click: playToggle },
+            element('source', { src: video.video, type: 'video/mp4' }, null, ' ')),
+          element('div', { class: 'video-overlay', id: 'overlay' }, { click: playToggle },
+            element('img', { class: 'video-playbutton', src: 'img/play.svg' }, null, ' '))),
+        element('div', { class: 'video-controls' }, null,
+          element('button', { class: 'video-controls__button' }, { click: () => { setTime(-3); } },
+            element('img', { class: 'video-controls__img', src: 'img/back.svg', id: 'rewind' }, null, ' ')),
+          element('button', { class: 'video-controls__button' }, { click: playToggle },
+            element('img', { class: 'video-controls__img', src: 'img/play.svg', id: 'play' }, null, ' '),
+            element('img', { class: 'video-controls__img button__active', src: 'img/pause.svg', id: 'pause' }, null, ' ')),
+          element('button', { class: 'video-controls__button' }, { click: soundToggle },
+            element('img', { class: 'video-controls__img button__active', src: 'img/unmute.svg', id: 'unmute' }, null, ' '),
+            element('img', { class: 'video-controls__img', src: 'img/mute.svg', id: 'mute' }, null, ' ')),
+          element('button', { class: 'video-controls__button' }, { click: fullScreen },
+            element('img', { class: 'video-controls__img', src: 'img/fullscreen.svg', id: 'fullScreen' }, null, ' ')),
+          element('button', { class: 'video-controls__button' }, { click: () => { setTime(3); } },
+            element('img', { class: 'video-controls__img', src: 'img/next.svg', id: 'forward' }, null, ' '))),
+        element('div', { class: 'video-description' }, null,
+          el('p', video.description))),
+      element('div', { class: 'grid' }, null, tengdMyndbond)),
   );
   body.appendChild(
     el('footer',
