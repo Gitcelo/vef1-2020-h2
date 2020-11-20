@@ -10,19 +10,17 @@ function rewind() {
 function playToggle() {
   let myVideo = document.getElementById("myVideo");
   let play = document.getElementById("play");
+  let pause = document.getElementById("pause");
   let parent = play.parentNode;
 
   if (myVideo.paused) {
     myVideo.play(); 
-    parent.removeChild(parent.firstChild);
-    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/pause.svg', 'id': 'play'}, null, " "));
-    console.log(parent.firstChild);
   }
   else {
     myVideo.pause(); 
-    parent.removeChild(parent.firstChild);
-    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, " "));
   }
+  play.classList.toggle('button__active');
+  pause.classList.toggle('button__active');
 }
 
 
@@ -83,11 +81,12 @@ export async function displayVideo() {
             element('img', { 'class':'video-controls__img', 'src':'img/back.svg'}, null, " ")
           ),
           element('button', { 'class': 'video-controls__button' }, {click : playToggle },
-            element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, " ")
+            element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, " "),
+            element('img', { 'class':'video-controls__img button__active', 'src':'img/pause.svg', 'id': 'pause'}, null, " ")
           ),
           element('button', { 'class': 'video-controls__button' }, {click : soundToggle },
-            element('img', { 'class':'video-controls__img', 'src':'img/unmute.svg'}, null, " "),
-            element('img', { 'class':'video-controls__img', 'src':'img/mute.svg'}, null, " ")
+            element('img', { 'class':'video-controls__img button__active', 'src':'img/unmute.svg', 'id': 'unmute'}, null, " "),
+            element('img', { 'class':'video-controls__img', 'src':'img/mute.svg', 'id': 'mute'}, null, " ")
           ),
           element('button', { 'class': 'video-controls__button' }, {click : fullScreen },
             element('img', { 'class':'video-controls__img', 'src':'img/fullscreen.svg', 'id': 'fullScreen'}, null, " ")
@@ -108,4 +107,9 @@ export async function displayVideo() {
       element('a', { 'href':'index.html' }, null, 'Til baka')
     )
   );
+  
+  document.getElementById('myVideo').addEventListener('ended', () => {
+    document.getElementById('pause').classList.add('button__active');
+    document.getElementById('play').classList.remove('button__active');
+  });
 }
