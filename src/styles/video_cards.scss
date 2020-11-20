@@ -3,6 +3,10 @@
 .video {
   &-card {
     margin-bottom: $margin-bottom;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &-thumbnail {

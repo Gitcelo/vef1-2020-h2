@@ -42,7 +42,9 @@ export async function makeVideos() {
   const mum = document.querySelector('.grid');
   const elem = document.createElement('section');
   elem.setAttribute('class', 'video row');
-  mum.appendChild(element('section', { 'class': 'video row' }, null, ''))
+  mum.appendChild(element('section', { 'class': 'video row' }, null, ''));
+  //mum.appendChild(element('hr', { 'class': 'video-linebrake' }, null, ' '));
+  console.log(mum.firstElementChild);
   const cat = data.categories;
   const videodata = data.videos;
   cat.forEach((category) => {
@@ -63,12 +65,11 @@ export async function makeVideos() {
             element('h3', { 'class': 'video-name' }, null, value.title),
             element('p', { 'class': 'video-uploadtime' }, null, `${value.created}`)
           )
-        )
-        ;
+        );
       elem.appendChild(daughter);
 
     });
-
+    elem.appendChild(element('hr', { 'class': 'video-linebrake' }, null, ' '));
   });
-  mum.appendChild(elem);
+  mum.firstElementChild.appendChild(elem);
 }

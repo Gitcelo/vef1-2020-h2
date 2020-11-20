@@ -1,4 +1,4 @@
-import { fetchVideos, search, timeStamp } from './videos';
+import { fetchVideos, search, timeStamp, goToVideo } from './videos';
 import { el, element } from './utils'
 
 
@@ -13,20 +13,18 @@ function rewind() {
 }
 
 function playToggle() {
-  let myVideo = document.getElementById('myVideo');
-  let play = document.getElementById('play');
-  let parent = play.parentNode;
+  let myVideo = document.getElementById("myVideo");
+  let play = document.getElementById("play");
+  let pause = document.getElementById("pause");
 
   if (myVideo.paused) {
     myVideo.play(); 
-    parent.removeChild(parent.firstChild);
-    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/pause.svg', 'id': 'play'}, null, ' '));
   }
   else {
-    myVideo.pause();
-    parent.removeChild(parent.firstChild);
-    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, ' '));
+    myVideo.pause(); 
   }
+  play.classList.toggle('button__active');
+  pause.classList.toggle('button__active');
 }
 
 
@@ -72,7 +70,7 @@ export async function displayVideo() {
   video.related.forEach(id => {
     const value = search(id, data.videos);
     const daughter =
-      element('div', { 'class': 'col col-4 col-12-sm video-card'}, null,
+      element('div', { 'class': 'col col-4 col-12-sm video-card'}, { click: () => { goToVideo(value.id)} },
         element('div', { 'class': 'video-thumbnail' }, null,
           element('img', { 'class': 'video-image', 'src': value.poster, 'alt': ''}, null, 'hehe'),
           element('div', { 'class': 'video-timestamp' }, null, timeStamp(value.duration))
@@ -98,10 +96,12 @@ export async function displayVideo() {
             element('img', { 'class':'video-controls__img', 'src':'img/back.svg', 'id': 'rewind'}, null, ' ')
           ),
           element('button', { 'class': 'video-controls__button' }, {click : playToggle },
-            element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, ' ')
+            element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, " "),
+            element('img', { 'class':'video-controls__img button__active', 'src':'img/pause.svg', 'id': 'pause'}, null, " ")
           ),
           element('button', { 'class': 'video-controls__button' }, {click : soundToggle },
-            element('img', { 'class':'video-controls__img', 'src':'img/unmute.svg', 'id': 'mute'}, null, ' '),
+            element('img', { 'class':'video-controls__img button__active', 'src':'img/unmute.svg', 'id': 'unmute'}, null, " "),
+            element('img', { 'class':'video-controls__img', 'src':'img/mute.svg', 'id': 'mute'}, null, " ")
           ),
           element('button', { 'class': 'video-controls__button' }, {click : fullScreen },
             element('img', { 'class':'video-controls__img', 'src':'img/fullscreen.svg', 'id': 'fullScreen'}, null, ' ')
@@ -121,5 +121,10 @@ export async function displayVideo() {
     el('footer', 
       element('a', { 'href':'index.html' }, null, 'Til baka')
     )
-  )
+  );
+  
+  document.getElementById('myVideo').addEventListener('ended', () => {
+    document.getElementById('pause').classList.add('button__active');
+    document.getElementById('play').classList.remove('button__active');
+  });
 }

@@ -1226,7 +1226,9 @@
 	            elem.setAttribute('class', 'video row');
 	            mum.appendChild(element('section', {
 	              'class': 'video row'
-	            }, null, ''));
+	            }, null, '')); //mum.appendChild(element('hr', { 'class': 'video-linebrake' }, null, ' '));
+
+	            console.log(mum.firstElementChild);
 	            cat = data.categories;
 	            videodata = data.videos;
 	            cat.forEach(function (category) {
@@ -1262,10 +1264,13 @@
 	                }, null, "".concat(value.created))));
 	                elem.appendChild(daughter);
 	              });
+	              elem.appendChild(element('hr', {
+	                'class': 'video-linebrake'
+	              }, null, ' '));
 	            });
-	            mum.appendChild(elem);
+	            mum.firstElementChild.appendChild(elem);
 
-	          case 13:
+	          case 14:
 	          case "end":
 	            return _context2.stop();
 	        }
@@ -1598,27 +1603,18 @@
 	}
 
 	function playToggle() {
-	  var myVideo = document.getElementById('myVideo');
-	  var play = document.getElementById('play');
-	  var parent = play.parentNode;
+	  var myVideo = document.getElementById("myVideo");
+	  var play = document.getElementById("play");
+	  var pause = document.getElementById("pause");
 
 	  if (myVideo.paused) {
 	    myVideo.play();
-	    parent.removeChild(parent.firstChild);
-	    parent.appendChild(element('img', {
-	      'class': 'video-controls__img',
-	      'src': 'img/pause.svg',
-	      'id': 'play'
-	    }, null, ' '));
 	  } else {
 	    myVideo.pause();
-	    parent.removeChild(parent.firstChild);
-	    parent.appendChild(element('img', {
-	      'class': 'video-controls__img',
-	      'src': 'img/play.svg',
-	      'id': 'play'
-	    }, null, ' '));
 	  }
+
+	  play.classList.toggle('button__active');
+	  pause.classList.toggle('button__active');
 	}
 
 	function soundToggle() {
@@ -1688,7 +1684,11 @@
 	              var value = search(id, data.videos);
 	              var daughter = element('div', {
 	                'class': 'col col-4 col-12-sm video-card'
-	              }, null, element('div', {
+	              }, {
+	                click: function click() {
+	                  goToVideo(value.id);
+	                }
+	              }, element('div', {
 	                'class': 'video-thumbnail'
 	              }, null, element('img', {
 	                'class': 'video-image',
@@ -1730,15 +1730,23 @@
 	              'class': 'video-controls__img',
 	              'src': 'img/play.svg',
 	              'id': 'play'
-	            }, null, ' ')), element('button', {
+	            }, null, " "), element('img', {
+	              'class': 'video-controls__img button__active',
+	              'src': 'img/pause.svg',
+	              'id': 'pause'
+	            }, null, " ")), element('button', {
 	              'class': 'video-controls__button'
 	            }, {
 	              click: soundToggle
 	            }, element('img', {
-	              'class': 'video-controls__img',
+	              'class': 'video-controls__img button__active',
 	              'src': 'img/unmute.svg',
+	              'id': 'unmute'
+	            }, null, " "), element('img', {
+	              'class': 'video-controls__img',
+	              'src': 'img/mute.svg',
 	              'id': 'mute'
-	            }, null, ' ')), element('button', {
+	            }, null, " ")), element('button', {
 	              'class': 'video-controls__button'
 	            }, {
 	              click: fullScreen
@@ -1762,8 +1770,12 @@
 	            body.appendChild(el('footer', element('a', {
 	              'href': 'index.html'
 	            }, null, 'Til baka')));
+	            document.getElementById('myVideo').addEventListener('ended', function () {
+	              document.getElementById('pause').classList.add('button__active');
+	              document.getElementById('play').classList.remove('button__active');
+	            });
 
-	          case 13:
+	          case 14:
 	          case "end":
 	            return _context.stop();
 	        }
@@ -1781,28 +1793,23 @@
 	        case 0:
 	          url = /[^/]*$/.exec(window.location.href)[0];
 
-	          if (!(url === '')) {
+	          if (!/^video.html/.test(url)) {
 	            _context.next = 6;
 	            break;
 	          }
 
 	          _context.next = 4;
-	          return makeVideos();
+	          return displayVideo();
 
 	        case 4:
-	          _context.next = 9;
+	          _context.next = 8;
 	          break;
 
 	        case 6:
-	          if (!/^video.html/.test(url)) {
-	            _context.next = 9;
-	            break;
-	          }
+	          _context.next = 8;
+	          return makeVideos();
 
-	          _context.next = 9;
-	          return displayVideo();
-
-	        case 9:
+	        case 8:
 	        case "end":
 	          return _context.stop();
 	      }
