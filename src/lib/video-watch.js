@@ -4,42 +4,57 @@ import { el, element } from './utils'
 
 
 function rewind() {
-
+  let myVideo = document.getElementById('myVideo');
+  t = myVideo.currentTime;
+  if (t < 3) 
+    myVideo.currentTime = 0;
+  else
+    myVideo.currentTime = t - 3;
 }
 
 function playToggle() {
-  let myVideo = document.getElementById("myVideo");
-  let play = document.getElementById("play");
+  let myVideo = document.getElementById('myVideo');
+  let play = document.getElementById('play');
   let parent = play.parentNode;
 
   if (myVideo.paused) {
     myVideo.play(); 
     parent.removeChild(parent.firstChild);
-    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/pause.svg', 'id': 'play'}, null, " "));
-    console.log(parent.firstChild);
+    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/pause.svg', 'id': 'play'}, null, ' '));
   }
   else {
-    myVideo.pause(); 
+    myVideo.pause();
     parent.removeChild(parent.firstChild);
-    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, " "));
+    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, ' '));
   }
 }
 
 
 function soundToggle() {
-  if (myVideo.muted) 
+
+  let myVideo = document.getElementById('myVideo');
+  let mute = document.getElementById('mute');
+  let parent = mute.parentNode;
+  if (myVideo.muted) {
     myVideo.muted = false; 
-  else 
+    parent.removeChild(parent.firstChild);
+    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/unmute.svg', 'id': 'mute'}, null, ' '));
+  }
+  else {
     myVideo.muted = true;
+    parent.removeChild(parent.firstChild);
+    parent.appendChild(element('img', { 'class':'video-controls__img', 'src':'img/mute.svg', 'id': 'mute'}, null, ' '));
+  }
 }
 
 function fullScreen() {
-  let myVideo = document.getElementById("myVideo");
+  let myVideo = document.getElementById('myVideo');
   myVideo.requestFullscreen();
 }
 
 function fastForward() {
-
+  let myVideo = document.getElementById('myVideo');
+  myVideo.currentTime = myVideo.currentTime + 3;
 }
 
 export async function displayVideo() {
@@ -80,20 +95,19 @@ export async function displayVideo() {
         ),
         element('div', { 'class': 'video-controls' }, null,
           element('button', { 'class': 'video-controls__button' }, {click : rewind },
-            element('img', { 'class':'video-controls__img', 'src':'img/back.svg'}, null, " ")
+            element('img', { 'class':'video-controls__img', 'src':'img/back.svg', 'id': 'rewind'}, null, ' ')
           ),
           element('button', { 'class': 'video-controls__button' }, {click : playToggle },
-            element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, " ")
+            element('img', { 'class':'video-controls__img', 'src':'img/play.svg', 'id': 'play'}, null, ' ')
           ),
           element('button', { 'class': 'video-controls__button' }, {click : soundToggle },
-            element('img', { 'class':'video-controls__img', 'src':'img/unmute.svg'}, null, " "),
-            element('img', { 'class':'video-controls__img', 'src':'img/mute.svg'}, null, " ")
+            element('img', { 'class':'video-controls__img', 'src':'img/unmute.svg', 'id': 'mute'}, null, ' '),
           ),
           element('button', { 'class': 'video-controls__button' }, {click : fullScreen },
-            element('img', { 'class':'video-controls__img', 'src':'img/fullscreen.svg', 'id': 'fullScreen'}, null, " ")
+            element('img', { 'class':'video-controls__img', 'src':'img/fullscreen.svg', 'id': 'fullScreen'}, null, ' ')
           ),
           element('button', { 'class': 'video-controls__button' }, {click : fastForward },
-            element('img', { 'class':'video-controls__img', 'src':'img/next.svg'}, null, " ")
+            element('img', { 'class':'video-controls__img', 'src':'img/next.svg', 'id': 'forward'}, null, ' ')
           )
         ),
         element('div', { 'class':'video-description'}, null, 

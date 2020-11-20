@@ -21,7 +21,7 @@ export function timeStamp(time) {
   let minutes = Math.floor(time / 60);
   let seconds = time % 60;
   seconds = (seconds < 10) ? '0' + seconds : seconds;
-  return minutes + ":" + seconds;
+  return minutes + ':' + seconds;
 }
 
 export function search(video, videos) {
