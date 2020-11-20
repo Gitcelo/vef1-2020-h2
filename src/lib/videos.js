@@ -2,11 +2,7 @@ import { formatDate, element } from './utils'
 
 const info = './videos.json';
 
-<<<<<<< HEAD
 export async function fetchVideos(){
-=======
-async function fetchVideos() {
->>>>>>> endurrada-videos
   let result;
   try {
     result = await fetch(info);
@@ -20,14 +16,14 @@ async function fetchVideos() {
   return null;
 }
 
-function timeStamp(time) {
+export function timeStamp(time) {
   let minutes = Math.floor(time / 60);
   let seconds = time % 60;
   seconds = (seconds < 10) ? '0' + seconds : seconds;
   return minutes + ":" + seconds;
 }
 
-function search(video, videos) {
+export function search(video, videos) {
   for (let i = 0; i < videos.length; i += 1) {
     if (video === videos[i].id) return videos[i];
   }
