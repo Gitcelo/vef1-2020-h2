@@ -912,13 +912,23 @@
 	  return _fetchVideos.apply(this, arguments);
 	}
 
+	function hour(time) {
+	  return time / 3600;
+	}
+
+	function search(video, videos) {
+	  for (var i = 0; i < videos.length; i += 1) {
+	    if (video === videos[i].id) return videos[i];
+	  }
+	}
+
 	function makeVideos() {
 	  return _makeVideos.apply(this, arguments);
 	}
 
 	function _makeVideos() {
 	  _makeVideos = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-	    var data, mum, cat, vids;
+	    var data, mum, elem, cat, vids;
 	    return regeneratorRuntime.wrap(function _callee2$(_context2) {
 	      while (1) {
 	        switch (_context2.prev = _context2.next) {
@@ -937,26 +947,45 @@
 	            return _context2.abrupt("return");
 
 	          case 5:
-	            mum = document.querySelector('.bigmomma');
+	            mum = document.querySelector('.grid');
+	            elem = document.createElement('section');
+	            elem.setAttribute('class', 'video row');
+	            mum.appendChild(element('section', {
+	              'class': 'video row'
+	            }, null, ''));
 	            cat = data.categories;
 	            vids = data.videos;
 	            cat.forEach(function (category) {
-	              mum.appendChild(element('h2', {
+	              console.log(category);
+	              elem.appendChild(element('h2', {
 	                'class': 'col'
 	              }, null, category.title));
 	              var vid = category.videos;
 	              vid.forEach(function (video) {
-	                vids.forEach(function (videos) {
-	                  /*if(video === videos.id) {
-	                    daughter.appendChild(
-	                      el()
-	                    )*/
-	                  console.log(videos.id);
-	                });
+	                var value = search(video, vids);
+	                var daughter = element('div', {
+	                  'class': 'col col-4 col-12-sm video-card'
+	                }, null, element('div', {
+	                  'class': 'video-thumbnail'
+	                }, null, element('img', {
+	                  'class': 'video-image',
+	                  'src': value.poster,
+	                  'alt': ''
+	                }, null, 'hehe'), element('div', {
+	                  'class': 'video-timestamp'
+	                }, null, "".concat(hour(value.duration)))), element('div', {
+	                  'class': 'video-info'
+	                }, null, element('h3', {
+	                  'class': 'video-name'
+	                }, null, value.title), element('p', {
+	                  'class': 'video-uploadtime'
+	                }, null, "".concat(value.created))));
+	                elem.appendChild(daughter);
 	              });
 	            });
+	            mum.appendChild(elem);
 
-	          case 10:
+	          case 13:
 	          case "end":
 	            return _context2.stop();
 	        }
