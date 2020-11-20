@@ -13,6 +13,7 @@
 
   &-thumbnail img {
     object-fit: contain;
+    width: 100%;
   }
 
   &-timestamp {
@@ -24,10 +25,6 @@
     background-color: #000a;
     color: #fff;
     border-radius: 5px;
-  }
-
-  &-info {
-
   }
 
   &-name {
