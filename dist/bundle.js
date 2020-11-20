@@ -1596,23 +1596,16 @@
 	  _redefine(_global, NUMBER, $Number);
 	}
 
-	function rewind() {
+	function setTime(time) {
 	  var myVideo = document.getElementById('myVideo');
-	  t = myVideo.currentTime;
-	  if (t < 3) myVideo.currentTime = 0;else myVideo.currentTime = t - 3;
+	  myVideo.currentTime += time;
 	}
 
 	function playToggle() {
 	  var myVideo = document.getElementById("myVideo");
 	  var play = document.getElementById("play");
 	  var pause = document.getElementById("pause");
-
-	  if (myVideo.paused) {
-	    myVideo.play();
-	  } else {
-	    myVideo.pause();
-	  }
-
+	  if (myVideo.paused) myVideo.play();else myVideo.pause();
 	  play.classList.toggle('button__active');
 	  pause.classList.toggle('button__active');
 	}
@@ -1620,35 +1613,15 @@
 	function soundToggle() {
 	  var myVideo = document.getElementById('myVideo');
 	  var mute = document.getElementById('mute');
-	  var parent = mute.parentNode;
-
-	  if (myVideo.muted) {
-	    myVideo.muted = false;
-	    parent.removeChild(parent.firstChild);
-	    parent.appendChild(element('img', {
-	      'class': 'video-controls__img',
-	      'src': 'img/unmute.svg',
-	      'id': 'mute'
-	    }, null, ' '));
-	  } else {
-	    myVideo.muted = true;
-	    parent.removeChild(parent.firstChild);
-	    parent.appendChild(element('img', {
-	      'class': 'video-controls__img',
-	      'src': 'img/mute.svg',
-	      'id': 'mute'
-	    }, null, ' '));
-	  }
+	  var unmute = document.getElementById('unmute');
+	  if (myVideo.muted) myVideo.muted = false;else myVideo.muted = true;
+	  mute.classList.toggle('button__active');
+	  unmute.classList.toggle('button__active');
 	}
 
 	function fullScreen() {
 	  var myVideo = document.getElementById('myVideo');
 	  myVideo.requestFullscreen();
-	}
-
-	function fastForward() {
-	  var myVideo = document.getElementById('myVideo');
-	  myVideo.currentTime = myVideo.currentTime + 3;
 	}
 
 	function displayVideo() {
@@ -1717,7 +1690,9 @@
 	            }, null, element('button', {
 	              'class': 'video-controls__button'
 	            }, {
-	              click: rewind
+	              click: function click() {
+	                setTime(-3);
+	              }
 	            }, element('img', {
 	              'class': 'video-controls__img',
 	              'src': 'img/back.svg',
@@ -1757,7 +1732,9 @@
 	            }, null, ' ')), element('button', {
 	              'class': 'video-controls__button'
 	            }, {
-	              click: fastForward
+	              click: function click() {
+	                setTime(3);
+	              }
 	            }, element('img', {
 	              'class': 'video-controls__img',
 	              'src': 'img/next.svg',
