@@ -2074,129 +2074,134 @@
 	            video = _context.sent;
 	            body = document.querySelector('body');
 
-	            if (video === null) {
-	              body.appendChild(el('div', element('p', null, null, 'Myndband fannst ekki'), element('a', {
-	                href: 'index.html'
-	              }, null, 'Til baka')));
-	            } else {
-	              tengdMyndbond = element('section', {
-	                class: 'video row'
-	              }, null, element('h2', {
-	                class: 'col'
-	              }, null, 'Tengd myndbönd'));
-	              video.related.forEach(function (id) {
-	                var value = search(id, data.videos);
-	                var daughter = element('div', {
-	                  class: 'col col-4 col-12-sm video-card'
-	                }, {
-	                  click: function click() {
-	                    goToVideo(value.id);
-	                  }
-	                }, element('div', {
-	                  class: 'video-thumbnail'
-	                }, null, element('img', {
-	                  class: 'video-image',
-	                  src: value.poster,
-	                  alt: ''
-	                }, null, 'hehe'), element('div', {
-	                  class: 'video-timestamp'
-	                }, null, timeStamp(value.duration))), element('div', {
-	                  class: 'video-info'
-	                }, null, element('h3', {
-	                  class: 'video-name'
-	                }, null, value.title), element('p', {
-	                  class: 'video-uploadtime'
-	                }, null, formatTime(value.created))));
-	                tengdMyndbond.appendChild(daughter);
-	              });
-	              body.appendChild(el('main', element('section', {
-	                class: 'video-view grid'
-	              }, null, el('h1', video.title), element('div', {
-	                class: 'video-container'
-	              }, null, element('video', {
-	                id: 'myVideo'
-	              }, {
-	                click: playToggle
-	              }, element('source', {
-	                src: video.video,
-	                type: 'video/mp4'
-	              }, null, ' ')), element('div', {
-	                class: 'video-overlay',
-	                id: 'overlay'
-	              }, {
-	                click: playToggle
-	              }, element('img', {
-	                class: 'video-playbutton',
-	                src: 'img/play.svg'
-	              }, null, ' '))), element('div', {
-	                class: 'video-controls'
-	              }, null, element('button', {
-	                class: 'video-controls__button'
-	              }, {
-	                click: function click() {
-	                  setTime(-3);
-	                }
-	              }, element('img', {
-	                class: 'video-controls__img',
-	                src: 'img/back.svg',
-	                id: 'rewind'
-	              }, null, ' ')), element('button', {
-	                class: 'video-controls__button'
-	              }, {
-	                click: playToggle
-	              }, element('img', {
-	                class: 'video-controls__img',
-	                src: 'img/play.svg',
-	                id: 'play'
-	              }, null, ' '), element('img', {
-	                class: 'video-controls__img button__active',
-	                src: 'img/pause.svg',
-	                id: 'pause'
-	              }, null, ' ')), element('button', {
-	                class: 'video-controls__button'
-	              }, {
-	                click: soundToggle
-	              }, element('img', {
-	                class: 'video-controls__img button__active',
-	                src: 'img/unmute.svg',
-	                id: 'unmute'
-	              }, null, ' '), element('img', {
-	                class: 'video-controls__img',
-	                src: 'img/mute.svg',
-	                id: 'mute'
-	              }, null, ' ')), element('button', {
-	                class: 'video-controls__button'
-	              }, {
-	                click: fullScreen
-	              }, element('img', {
-	                class: 'video-controls__img',
-	                src: 'img/fullscreen.svg',
-	                id: 'fullScreen'
-	              }, null, ' ')), element('button', {
-	                class: 'video-controls__button'
-	              }, {
-	                click: function click() {
-	                  setTime(3);
-	                }
-	              }, element('img', {
-	                class: 'video-controls__img',
-	                src: 'img/next.svg',
-	                id: 'forward'
-	              }, null, ' '))), element('div', {
-	                class: 'video-description'
-	              }, null, el('p', video.description))), element('div', {
-	                class: 'grid'
-	              }, null, tengdMyndbond)));
-	              body.appendChild(el('footer', element('a', {
-	                href: 'index.html'
-	              }, null, 'Til baka')));
-	              document.getElementById('myVideo').addEventListener('ended', function () {
-	                document.getElementById('pause').classList.add('button__active');
-	                document.getElementById('play').classList.remove('button__active');
-	              });
+	            if (!(video === null)) {
+	              _context.next = 16;
+	              break;
 	            }
 
-	          case 14:
+	            body.appendChild(el('div', element('p', null, null, 'Myndband fannst ekki'), element('a', {
+	              href: 'index.html'
+	            }, null, 'Til baka')));
+	            return _context.abrupt("return");
+
+	          case 16:
+	            tengdMyndbond = element('section', {
+	              class: 'video row'
+	            }, null, element('h2', {
+	              class: 'col'
+	            }, null, 'Tengd myndbönd'));
+	            video.related.forEach(function (id) {
+	              var value = search(id, data.videos);
+	              var daughter = element('div', {
+	                class: 'col col-4 col-12-sm video-card'
+	              }, {
+	                click: function click() {
+	                  goToVideo(value.id);
+	                }
+	              }, element('div', {
+	                class: 'video-thumbnail'
+	              }, null, element('img', {
+	                class: 'video-image',
+	                src: value.poster,
+	                alt: ''
+	              }, null, 'hehe'), element('div', {
+	                class: 'video-timestamp'
+	              }, null, timeStamp(value.duration))), element('div', {
+	                class: 'video-info'
+	              }, null, element('h3', {
+	                class: 'video-name'
+	              }, null, value.title), element('p', {
+	                class: 'video-uploadtime'
+	              }, null, formatTime(value.created))));
+	              tengdMyndbond.appendChild(daughter);
+	            });
+	            body.appendChild(el('main', element('section', {
+	              class: 'video-view grid'
+	            }, null, el('h1', video.title), element('div', {
+	              class: 'video-container'
+	            }, null, element('video', {
+	              id: 'myVideo'
+	            }, {
+	              click: playToggle
+	            }, element('source', {
+	              src: video.video,
+	              type: 'video/mp4'
+	            }, null, ' ')), element('div', {
+	              class: 'video-overlay',
+	              id: 'overlay'
+	            }, {
+	              click: playToggle
+	            }, element('img', {
+	              class: 'video-playbutton',
+	              src: 'img/play.svg'
+	            }, null, ' '))), element('div', {
+	              class: 'video-controls'
+	            }, null, element('button', {
+	              class: 'video-controls__button'
+	            }, {
+	              click: function click() {
+	                setTime(-3);
+	              }
+	            }, element('img', {
+	              class: 'video-controls__img',
+	              src: 'img/back.svg',
+	              id: 'rewind'
+	            }, null, ' ')), element('button', {
+	              class: 'video-controls__button'
+	            }, {
+	              click: playToggle
+	            }, element('img', {
+	              class: 'video-controls__img',
+	              src: 'img/play.svg',
+	              id: 'play'
+	            }, null, ' '), element('img', {
+	              class: 'video-controls__img button__active',
+	              src: 'img/pause.svg',
+	              id: 'pause'
+	            }, null, ' ')), element('button', {
+	              class: 'video-controls__button'
+	            }, {
+	              click: soundToggle
+	            }, element('img', {
+	              class: 'video-controls__img button__active',
+	              src: 'img/unmute.svg',
+	              id: 'unmute'
+	            }, null, ' '), element('img', {
+	              class: 'video-controls__img',
+	              src: 'img/mute.svg',
+	              id: 'mute'
+	            }, null, ' ')), element('button', {
+	              class: 'video-controls__button'
+	            }, {
+	              click: fullScreen
+	            }, element('img', {
+	              class: 'video-controls__img',
+	              src: 'img/fullscreen.svg',
+	              id: 'fullScreen'
+	            }, null, ' ')), element('button', {
+	              class: 'video-controls__button'
+	            }, {
+	              click: function click() {
+	                setTime(3);
+	              }
+	            }, element('img', {
+	              class: 'video-controls__img',
+	              src: 'img/next.svg',
+	              id: 'forward'
+	            }, null, ' '))), element('div', {
+	              class: 'video-description'
+	            }, null, el('p', video.description))), element('div', {
+	              class: 'grid'
+	            }, null, tengdMyndbond)));
+	            body.appendChild(el('footer', element('a', {
+	              href: 'index.html'
+	            }, null, 'Til baka')));
+	            document.getElementById('myVideo').addEventListener('ended', function () {
+	              document.getElementById('pause').classList.add('button__active');
+	              document.getElementById('play').classList.remove('button__active');
+	            });
+
+	          case 21:
 	          case "end":
 	            return _context.stop();
 	        }
