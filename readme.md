@@ -13,7 +13,7 @@ Verkefnið notfærir sér Sass, Browser-Sync, Concurrently, RollUp, Babel, ESLin
 Til þess að tryggja að allar SCSS og JS skrár séu með réttu lint er keyrt skipunina `npm run test`. Til að setja upp verkefnið til keyrslu er keyrt skipunina `npm run build` og til að keyra verkefnið er keyrt skipunina `npm run dev`
 
 ### Hvar má finna skrár
-* *src* mappan geymir allar *.js* og *.scss* skrár, þær fyrrnefndu í *lib* möppu og þlr seinni í *styles* möppu. Þýddar skrár eru settar í *dist* möppu verkefnisins. Myndbönd og forskoðanir þeirra (*thumbnails*) finnast í videos möppunni. Aðrar skrár (t.d `index.html` og þessi readme) finnast í rótarmöppu verkefnisins. 
+* *src* mappan geymir allar *.js* og *.scss* skrár, þær fyrrnefndu í *lib* möppu og þær seinni í *styles* möppu. Þýddar skrár eru settar í *dist* möppu verkefnisins. Myndbönd og forskoðanir þeirra (*thumbnails*) finnast í videos möppunni. Aðrar skrár (t.d `index.html` og þessi readme) finnast í rótarmöppu verkefnisins. 
 
 ### Uppbygging SCSS skjala
 * `config.scss` skráin geymir breytur sem notast í öðrum scss skrám
