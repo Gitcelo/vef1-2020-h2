@@ -2079,7 +2079,7 @@
 	              break;
 	            }
 
-	            body.appendChild(el('div', element('p', null, null, 'Myndband fannst ekki'), element('a', {
+	            body.appendChild(el('div', element('p', null, null, 'Obbosí! Ekkert myndband að sjá hér :('), element('a', {
 	              href: 'index.html'
 	            }, null, 'Til baka')));
 	            return _context.abrupt("return");
