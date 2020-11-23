@@ -109,5 +109,6 @@ export default async function displayVideo() {
   document.getElementById('myVideo').addEventListener('ended', () => {
     document.getElementById('pause').classList.add('button__active');
     document.getElementById('play').classList.remove('button__active');
+    document.getElementById('overlay').classList.remove('button__active');
   });
 }

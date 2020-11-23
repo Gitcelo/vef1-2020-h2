@@ -2199,6 +2199,7 @@
 	            document.getElementById('myVideo').addEventListener('ended', function () {
 	              document.getElementById('pause').classList.add('button__active');
 	              document.getElementById('play').classList.remove('button__active');
+	              document.getElementById('overlay').classList.remove('button__active');
 	            });
 
 	          case 21:
